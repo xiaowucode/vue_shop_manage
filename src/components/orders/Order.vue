@@ -141,45 +141,7 @@ export default {
         ],
       },
       progressVisible: false,
-    }
-  },
-  created() {
-    this.getOrdersList()
-  },
-  methods: {
-    async getOrdersList() {
-      const { data: res } = await this.$http.get('orders', {
-        params: this.queryInfo,
-      })
-      if (res.meta.status !== 200) {
-        return this.$message.error('获取订单列表失败')
-      }
-      this.total = res.data.total
-      this.ordersList = res.data.goods
-      console.log(this.ordersList)
-    },
-    handleSizeChange(newPageSize) {
-      this.queryInfo.pagesize = newPageSize
-      this.getOrdersList()
-    },
-    handleCurrentChange(newPageNum) {
-      this.queryInfo.pagenum = newPageNum
-      this.getOrdersList()
-    },
-    addressClose() {
-      this.$refs.addressFormRef.resetFields()
-    },
-    editAddress() {
-      this.addressVisible = true
-    },
-    async showProgress() {
-      // 接口有问题
-      // const { data: res } = await this.$http.get('/kuaidi/75805749443104')
-      // if (res.meta.status !== 200) {
-      //   return this.$message.error('获取物流进度失败')
-      // }
-      // console.log(res.data)
-      this.progressInfo = [
+      progressInfo: [
         {
           time: '2018-05-10 09:39:00',
           ftime: '2018-05-10 09:39:00',
@@ -242,7 +204,45 @@ export default {
           context: '商品已经下单',
           location: '',
         },
-      ]
+      ],
+    }
+  },
+  created() {
+    this.getOrdersList()
+  },
+  methods: {
+    async getOrdersList() {
+      const { data: res } = await this.$http.get('orders', {
+        params: this.queryInfo,
+      })
+      if (res.meta.status !== 200) {
+        return this.$message.error('获取订单列表失败')
+      }
+      this.total = res.data.total
+      this.ordersList = res.data.goods
+      console.log(this.ordersList)
+    },
+    handleSizeChange(newPageSize) {
+      this.queryInfo.pagesize = newPageSize
+      this.getOrdersList()
+    },
+    handleCurrentChange(newPageNum) {
+      this.queryInfo.pagenum = newPageNum
+      this.getOrdersList()
+    },
+    addressClose() {
+      this.$refs.addressFormRef.resetFields()
+    },
+    editAddress() {
+      this.addressVisible = true
+    },
+    async showProgress() {
+      // 接口有问题
+      // const { data: res } = await this.$http.get('/kuaidi/75805749443104')
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error('获取物流进度失败')
+      // }
+      // console.log(res.data)
       this.progressVisible = true
     },
   },
